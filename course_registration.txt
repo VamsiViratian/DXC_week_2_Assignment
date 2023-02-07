@@ -1,0 +1,129 @@
+public class Course_Registration 
+{
+	private String studentName;
+	private int registrationId;
+	private float qualifyingMarks;
+	private double couseFee;
+	private int couseId;
+	private boolean hostelRequired;
+	
+	Course_Registration(String studentName,int registrationId,float qualifyingMarks,double couseFee,int couseId,boolean hostelRequired)
+	{
+		this.studentName=studentName;
+		this.registrationId=registrationId;
+		this.qualifyingMarks=qualifyingMarks;
+		this.couseFee=couseFee;
+		this.couseId=couseId;
+		this.hostelRequired=hostelRequired;
+	}
+
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	public int getRegistrationId() {
+		return registrationId;
+	}
+
+	public void setRegistrationId(int registrationId) {
+		this.registrationId = registrationId;
+	}
+
+	public float getQualifyingMarks() {
+		return qualifyingMarks;
+	}
+
+	public void setQualifyingMarks(float qualifyingMarks) {
+		this.qualifyingMarks = qualifyingMarks;
+	}
+
+	public double getCouseFee() {
+		return couseFee;
+	}
+
+	public void setCouseFee(double couseFee) {
+		this.couseFee = couseFee;
+	}
+
+	public int getCouseId() {
+		return couseId;
+	}
+
+	public void setCouseId(int couseId) {
+		this.couseId = couseId;
+	}
+
+	public boolean isHostelRequired() {
+		return true;
+	}
+
+	public void setHostelRequired(boolean hostelRequired) {
+		this.hostelRequired = hostelRequired;
+	}
+	
+	public boolean validateMarks()
+	  {
+	    if (qualifyingMarks >= 65 && qualifyingMarks <= 100) {
+	      return true;
+	    }
+	    return false;
+	  }
+	
+	public void validatecourseFee()
+	{
+		if(getQualifyingMarks()>65)
+		{
+			System.out.println("you are eligible to get the admission");
+			
+		}
+		else if(getQualifyingMarks()>65 && getQualifyingMarks()<=69)
+		{
+			couseFee=couseFee-((5/100)*couseFee);
+		}
+		else if(getQualifyingMarks()>70 && getQualifyingMarks()<=84)
+		{
+			couseFee=couseFee-((10/100)*couseFee);
+		}
+		else if(getQualifyingMarks()>=85)
+		{
+			couseFee=couseFee-((15/100)*couseFee);
+		}
+		else 
+			System.out.println("you are not eligible to get the admission");
+		
+		
+	}
+	
+	public boolean validatecourseId()
+	{
+		if(couseId>=1001 && couseId<=1005 )
+		{
+			return true;
+		}
+		else
+			return false;
+	}
+	
+
+}
+
+public class Tester {
+
+	public static void main(String[] args) 
+	{
+		Course_Registration cr = new Course_Registration("raju",5001,80,55000.0,1001,true);
+	    System.out.println("student name: "+cr.getStudentName());
+	    System.out.println("registration id: "+cr.getRegistrationId());
+	    System.out.println("qualifying exam marks: "+cr.getQualifyingMarks());
+	    System.out.println("course id: "+cr.getCouseId());
+	    System.out.println("Hostel Required: "+cr.isHostelRequired());
+	    System.out.println("total fee: "+cr.getCouseFee());
+
+	    
+	}
+
+}
