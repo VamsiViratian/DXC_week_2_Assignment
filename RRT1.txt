@@ -1,0 +1,165 @@
+public interface Certification 
+
+{
+	 double regularcoursefee=2000;
+	 double crashcoursefee=5000;
+	 double claculatefee();
+
+}
+
+public abstract class RRTechnical_Certification
+{
+	private String studentName;
+	private String courseName;
+	protected int registrationId;
+	protected int admissionTestMarks;
+	protected static int counter;
+	
+	static
+	{
+		counter=1000;
+	}
+	
+	RRTechnical_Certification(String studentName,String courseName,int registrationId,int admissionTestMarks)
+	{
+		this.studentName=studentName;
+		this.courseName=courseName;
+		this.registrationId=registrationId;
+		this.admissionTestMarks= admissionTestMarks;
+	   
+	}
+
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public int getRegistrationId() {
+		return registrationId;
+	}
+
+	public void setRegistrationId(int registrationId) {
+		this.registrationId = registrationId;
+	}
+
+	public int getAdmissionTestMarks() {
+		return admissionTestMarks;
+	}
+
+	public void setAdmissionTestMarks(int admissionTestMarks) {
+		this.admissionTestMarks = admissionTestMarks;
+	}
+
+	 void generateregistrationid(){
+			this.registrationId= + ++counter;
+			System.out.println("Registration id      :"+this.registrationId);
+		}
+		double calculatefee(){
+			return 0.0;
+			
+			
+		}
+	
+
+}
+
+public abstract class Regularcoursecertification extends RRTechnical_Certification implements Certification
+{
+	private int courseDuration;
+
+	Regularcoursecertification(String studentName, String courseName, int registrationId, int admissionTestMarks,int courseDuration) 
+	{
+		super(studentName, courseName, registrationId, admissionTestMarks);
+		this.courseDuration=courseDuration;
+	
+	}
+
+	RRTechnical_Certification rrt;
+	public int getCourseduration() {
+		return courseDuration;
+	}
+	
+	public void setCourseduration(int courseduration) {
+		this.courseDuration = courseduration;
+	}
+	 void generateregistrationid(){
+			this.registrationId= + ++counter;
+			System.out.println("Registration id      :"+this.registrationId);
+		}
+	 double calculatefee() {
+		 double fee=getCourseduration()* regularcoursefee;
+		 if(admissionTestMarks>=90) {
+				return fee- fee*0.1 ;
+			}else if(admissionTestMarks>=75&&admissionTestMarks<=89) {
+				return fee-fee*0.05;
+		}
+			return fee;
+			
+	 }
+
+}
+
+public abstract class Crashcoursecertification extends RRTechnical_Certification implements Certification
+{
+
+	Crashcoursecertification(String studentName, String courseName, int registrationId, int admissionTestMarks) {
+		super(studentName, courseName, registrationId, admissionTestMarks);
+		
+	}
+
+	void generateregistrationid(){
+		this.registrationId= + ++counter;
+		System.out.println("Registration id      :"+this.registrationId);
+	}
+ 
+ double calculatefee() {
+	 double fee=crashcoursefee;
+	 if(admissionTestMarks>=90) {
+			return fee-fee*0.1 ;
+		}else if(admissionTestMarks>=75&&admissionTestMarks<=89) {
+			return fee-fee*0.05;
+	}
+		return fee;
+ }
+
+}
+public class Tester {
+
+	public static void main(String[] args) 
+	{
+		Regularcoursecertification k = new Regularcoursecertification("Rakesh","J2EE",85,5);
+		Crashcoursecertification s=new Crashcoursecertification("Roshan","Amgular",71);
+		System.out.println("RegularCourseCertification Details");
+		System.out.println("*************");
+		System.out.println("Student name     : "+k.getStudentName());
+		System.out.println("Course  name     : "+k.getCourseduration());
+		System.out.println("Course Duration  : "+k.getCourseduration()+"months");
+		k.generateregistrationid();
+		double fee=k.calculatefee();
+		System.out.println("fee              : "+fee);
+		System.out.println("crashCourseCertification Details");
+		System.out.println("*************");
+		System.out.println("Student name     : "+s.getStudentName());
+		System.out.println("Course  name     : "+s.getCourseName());
+		System.out.println("Course Duration  :  2 months");
+		s.generateregistrationid();
+		double tax=12.36;
+		double crashfee=s.calculatefee()+(tax*s.calculatefee()/100);
+		System.out.println("fee              : "+crashfee);
+		
+		
+
+	}
+
+}
